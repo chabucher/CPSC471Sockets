@@ -2,7 +2,7 @@
 
 + Team Members:
 	1/ trang_nguyen@csu.fullerton.edu
-	2/ Add your name here  
+	2/ jcoberly@csu.fullerton.edu
 
 + Project Assignment - FTP Server and Client applications
 	a) Programming Language used: Python version 3 and above
