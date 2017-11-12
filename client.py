@@ -258,6 +258,12 @@ while (ans != "quit"):
 		dataBuff = recvAll(clientSocket, 10)
 		portNum = recvAll(clientSocket, int(dataBuff))
 		sendCommand(clientSocket, serverName, portNum, command[1])
+	elif command[0] == "get":
+		print("feature not active yet!")
+	elif command[0] == "ls":
+		print("feature not active yet!")
+	else:
+		print("not a valid command")
 
 
 		
