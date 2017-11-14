@@ -145,8 +145,8 @@ ans = ""
 fileName = ""
 success = ""
 
-ans =raw_input("ftp> ")
 while (ans != "quit"):
+	ans =raw_input("ftp> ")
 	(command, rest) = ans.split()
 	if command == "put":
 		fileName = rest
