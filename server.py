@@ -172,9 +172,8 @@ while True:
     (clientSocket,add) = serverSocket.accept()
     print ('Connected with client',add, '@', serverPort)
     while not quit:
-         request = clientSocket.recv(bufferSize)
-         command, rest = request.split()
-         if command == 'put':
+         command = clientSocket.recv(bufferSize)
+         if command[0:4] == 'put':
             print ('Put command received. Prepare to receive file')
             fileName = rest
             tempSock = connectTempSocket(clientSocket)
@@ -192,6 +191,16 @@ while True:
                     # Close temporary socket
 
             tempSock.close()
+         elif command == 'quit':
+             print ('Quit command received.Closing socket now')
+             clientSocket.close()
+             quit = True
+         else:
+             print ("Not a valid command")
+
+
+
+
 
 
 			
