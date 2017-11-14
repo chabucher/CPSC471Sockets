@@ -6,10 +6,12 @@
 # *******************************************************************
 
 import sys
+import os
 import subprocess
 import socket
 
-
+bufferSize = 4096
+serverName = "localhost"
 
 # *******************************************************************
 #							FUNCTIONS
@@ -28,12 +30,9 @@ def recvAll(sock, numBytes):
 	# The buffer
 	recvBuff = ""
 	
-	# The temporary buffer
-	tmpBuff = ""
-	
 	# Keep receiving till all is received
 	while len(recvBuff) < numBytes:
-		
+		# temporary buffer
 		# Attempt to receive bytes
 		tmpBuff =  sock.recv(numBytes)
 		
@@ -46,23 +45,26 @@ def recvAll(sock, numBytes):
 	
 	return recvBuff
 
-def createSocket(portNumb):
-	import socket
-	#create an INET, STREAMing socket
-	clientSocket=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+# Function to create a socket using a provided port number
+def createSocket(portNum):
 
-	#bind the socket to a port
-	clientSocket.connect((serverName,portNumb))
-	print("Connected to port #:",portNumb)
-
-	return clientSocket
+	# Create a TCP socket
+	connSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	
+	# Connect to server
+	connSock.connect((serverName, int (portNum)))
+	print ("Connected to port #", portNum)
+	
+	# Return a socket
+	return connSock
 
 	
 def sizeOfFile (fileName):
-	import os
-	return os.path.getSize(fileName)
-	
-def uploadFileToServer(fileName):
+	statinfo = os.stat(fileName)
+	size = statinfo.st_size
+	return size
+
+def uploadFileToServer(fileName, portNumb):
 
 	#generate an emphemeral port
 	tempSocket=createSocket(portNumb)
@@ -75,10 +77,11 @@ def uploadFileToServer(fileName):
 		tempSocket.close()
 
 	fileSize=sizeOfFile(fileName)
+	print ("Uploading", fileName,"to server")
 
 	while True:
 		# Read  data
-		fileData = file_object.read(fileName)
+		fileData = file_object.read(fileSize)
 	
 		# Make sure we did not hit EOF
 		if fileData:
@@ -118,115 +121,8 @@ def uploadFileToServer(fileName):
 	
 
 #def downloadFileFromServer(socket,fileName):
-def sendFile(serverAddr, serverPort, fileName):
-	# Open the file
-	fileObj = open(fileName, "r")
-
-	# Create a TCP socket
-	connSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-	# Connect to the server
-	connSock.connect((serverAddr, serverPort))
-
-	# The number of bytes sent
-	numSent = 0
-
-	# The file data
-	fileData = None
-
-	# Keep sending until all is sent
-	while True:
-		
-		# Read 65536 bytes of data
-		fileData = fileObj.read(65536)
-		# Make sure we did not hit EOF
-		if fileData:
-			
-				
-			# Get the size of the data read
-			# and convert it to string
-			dataSizeStr = str(len(fileData))
-			print("Printing Data Size: ", dataSizeStr)
-			
-			# Prepend 0's to the size string
-			# until the size is 10 bytes
-			while len(dataSizeStr) < 10:
-				dataSizeStr = "0" + dataSizeStr
-		
-		
-			# Prepend the size of the data to the
-			# file data.
-			fileData = dataSizeStr + fileData	
-			
-			# The number of bytes sent
-			numSent = 0
-			
-			# Send the data!
-			while len(fileData) > numSent:
-				numSent += connSock.send(fileData[numSent:].encode('utf-8'))
-		
-		# The file has been read. We are done
-		else:
-			break
 
 
-	print("Sent ", numSent, " bytes.")
-		
-	# Close the socket and the file
-	connSock.close()
-	fileObj.close()
-
-def sendCommand(clientSocket, serverAddr, serverPort, commandName):
-	
-
-	# The number of bytes sent
-	numSent = 0
-
-	# Keep sending until all is sent
-	while True:	
-		
-		dataSize = str(len(commandName))
-		while len(dataSize) < 10:
-			dataSize = "0" + dataSize
-
-		commandData = dataSize + commandName
-
-		# The number of bytes sent
-		numSent = 0
-			
-		# Send the data!
-		while len(commandData) > numSent:
-			numSent += clientSocket.send(commandData[numSent:].encode('utf-8'))
-		
-		# The file has been read. We are done
-		else:
-			break
-
-
-	print("Sent ", numSent, " bytes.")
-		
-
-def recvAll(sock, numBytes):
-	# The buffer
-	recvBuff = ""
-	
-	# The temporary buffer
-	tmpBuff = ""
-	
-	# Keep receiving till all is received
-	while len(recvBuff) < numBytes:
-		
-		# Attempt to receive bytes
-		tmpBuff =  sock.recv(numBytes)
-		
-		# The other side has closed the socket
-		if not tmpBuff:
-			break
-		
-		# Add the received bytes to the buffer
-		recvBuff += tmpBuff.decode('UTF-8')
-	
-	return recvBuff
 
 
 
@@ -241,29 +137,33 @@ if len(sys.argv) < 3:
 	print ("python " + sys.argv[0]+"<server_machine>"+"<server_port>")
 
 serverName=sys.argv[1]
-serverPort=int(sys.argv[2])
-print(serverName)
+serverPort=int (sys.argv[2])
 
-clientSocket= createSocket(serverPort)
+primarySocket= createSocket(serverPort)
 
 ans = ""
+fileName = ""
+success = ""
 
 while (ans != "quit"): 
-	ans = input("ftp> ")
-	command = ans.split()
-	print(command[0])
-	if command[0] == "put":
-		fileName = command[1]
-		sendCommand(clientSocket, serverName, serverPort, command[0])
-		dataBuff = recvAll(clientSocket, 10)
-		portNum = recvAll(clientSocket, int(dataBuff))
-		sendCommand(clientSocket, serverName, portNum, command[1])
-	elif command[0] == "get":
-		print("feature not active yet!")
-	elif command[0] == "ls":
-		print("feature not active yet!")
+	ans =raw_input("ftp> ")
+	(command, rest) = ans.split()
+	if command == "put":
+		fileName = rest
+		primarySocket.send(ans)
+		tempPort=primarySocket.recv(bufferSize)
+		print ("Ephermeral port # ",tempPort)
+		success = uploadFileToServer(fileName,tempPort)
+		if success == 0:
+			print ("fail to upload")
+		else:
+			print("successfully uploaded")
+	elif command == "get":
+		fileName = rest
+		
+		
 	else:
-		print("not a valid command")
+		print ("not a valid command")
 
 
 		
