@@ -180,13 +180,12 @@ while True:
 
                 # Receive the file from client
 
-            print ('Now, receiving ' + fileName + ' from client...')
+            print ('Receive ' + fileName + ' from client...')
             success = receiveFile(fileName, tempSock)
             if success == 0:
-                print ('Failed. File was not uploaded.')
+                print ('Does not receive.' + fileName)
             else:
-                print ('Successful!', fileName,
-                   'was uploaded from client.')
+                print ('Successfully uploaded!')
 
                     # Close temporary socket
 
