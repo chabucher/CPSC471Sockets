@@ -157,7 +157,7 @@ while (ans != "quit"):
 		if success == 0:
 			print ("fail to upload")
 		else:
-			print("successfully uploaded")
+			print("Finish uploading")
 	elif command == "get":
 		fileName = rest
 
