@@ -66,8 +66,12 @@ def connectTempSocket(client):
     tempSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # Bind the socket to port 0
-
-    tempSocket.bind(('', 0))
+    try:
+    	tempSocket.bind(('', 0))
+    except socket.error, msg:
+    	print ('Bind failed. Error Code : ' + str(msg[0]) + ' Message ' \
+        + msg[1])
+  	sys.exit()
 
     # Retreive the ephemeral port number
 
@@ -173,7 +177,7 @@ while True:
     print ('Connected with client',add, '@', serverPort)
     while not quit:
          command = clientSocket.recv(bufferSize)
-         if command[0:4] == 'put':
+         if command[:3] == 'put':
             print ('Put command received. Prepare to receive file')
             fileName = rest
             tempSock = connectTempSocket(clientSocket)
