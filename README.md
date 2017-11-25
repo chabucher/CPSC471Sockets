@@ -1,10 +1,11 @@
 # 471FinalProject
 
-Team Members:
-	1/ Trang Nguyen: trang_nguyen@csu.fullerton.edu
-	2/ Justin Coberly: jcoberly@csu.fullerton.edu
-	3/ Charles Bucher: chabucher@csu.fullerton.edu
-	4/ Andre Victoria: andreappstuff@csu.fullerton.edu
++Team Members:
+
+	1) Trang Nguyen: trang_nguyen@csu.fullerton.edu
+	2) Justin Coberly: jcoberly@csu.fullerton.edu
+	3) Charles Bucher: chabucher@csu.fullerton.edu
+	4) Andre Victoria: andreappstuff@csu.fullerton.edu
 
 + Project Assignment - FTP Server and Client applications
 	a) Programming Language used: Python version 3.6
