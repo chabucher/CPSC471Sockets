@@ -10,6 +10,7 @@
 + Project Assignment - FTP Server and Client applications
 
 	a) Programming Language used: Python version 3.6
+	
 	b) Files included in this submission:
 	
 		1) FTP Client program		Client/client.py
@@ -20,7 +21,8 @@
 
 + How to execute this program:
 
-	Using Ubuntu terminal and python 3.6
+	Using Ubuntu terminal and Python 3.6
+	
 	 Steps to execute:
 	 
 		1) On a terminal, navigate to server.py directory
