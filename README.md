@@ -1,6 +1,6 @@
 # 471FinalProject
 
-+Team Members:
+# Team Members:
 
 	1) Trang Nguyen: trang_nguyen@csu.fullerton.edu
 	2) Justin Coberly: jcoberly@csu.fullerton.edu
