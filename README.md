@@ -1,21 +1,24 @@
 # 471FinalProject
 
 + Team Members:
-	1/ trang_nguyen@csu.fullerton.edu
-	2/ jcoberly@csu.fullerton.edu
+	1/ Trang Nguyen: trang_nguyen@csu.fullerton.edu
+	2/ Justin Coberly: jcoberly@csu.fullerton.edu
+	3/ Charles Bucher: chabucher@csu.fullerton.edu
+	4/ Andre Victoria
 
 + Project Assignment - FTP Server and Client applications
-	a) Programming Language used: Python version 3 and above
+	a) Programming Language used: Python version 3.6
 	b) Files included in this submission:
-		1/ FTP Client program		cli.py
-		2/ FTP Server program		serv.py
-		3/ will add some more later on		
+		1/ FTP Client program		Client/client.py
+		2/ FTP Server program		Server/server.py
+		3/ State Diagram Files		State Diagrams
+
 
 
 + How to execute this program:
-	In my case, I'm using Ubuntu terminal and python 3.6
+	Using Ubuntu terminal and python 3.6
 	 Steps to execute:
-		1/ On a terminal, navigate to where server.py is
+		1/ On a terminal, navigate to server.py directory
 		2/ Type "python server.py <port_number>" to run the server
 		  	 e.g. $ python server.py 1234
 		3/ On a separate terminal, navigate to where client.py is
