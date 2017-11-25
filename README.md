@@ -8,6 +8,7 @@
 	4) Andre Victoria: andreappstuff@csu.fullerton.edu
 
 + Project Assignment - FTP Server and Client applications
+
 	a) Programming Language used: Python version 3.6
 	b) Files included in this submission:
 	
@@ -18,6 +19,7 @@
 
 
 + How to execute this program:
+
 	Using Ubuntu terminal and python 3.6
 	 Steps to execute:
 	 
