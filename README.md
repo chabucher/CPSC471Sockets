@@ -7,19 +7,7 @@
 	3) Charles Bucher: chabucher@csu.fullerton.edu
 	4) Andre Victoria: andreappstuff@csu.fullerton.edu
 
-+ Project Assignment - FTP Server and Client applications
-
-	a) Programming Language used: Python version 3.6
-	
-	b) Files included in this submission:
-	
-		1) FTP Client program		Client/client.py
-		2) FTP Server program		Server/server.py
-		3) State Diagram Files		State Diagrams
-
-
-
-+ How to execute this program:
+# Instructions
 
 	Using Ubuntu terminal and Python 3.6
 	
