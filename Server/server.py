@@ -1,9 +1,8 @@
-#!/usr/bin/python
-
 # *******************************************************************
-# Trang Nguyen trang_nguyen@csu.fullerton.edu CWID: 802816165
-# Charles Bucher charles.abucher@gmail.com CWID: 893127498
-# Insert your name here
+# Trang Nguyen
+# Charles Bucher
+# Justing Coberly
+# Andre Victoria
 #
 # CPSC 471 - Section 2
 # *******************************************************************

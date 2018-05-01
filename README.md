@@ -26,10 +26,12 @@
 	 Steps to execute:
 	 
 		1) On a terminal, navigate to server.py directory
-		2) Type "python server.py <port_number>" to run the server
+		2) Type "python3 server.py <port_number>" to run the server
 		  	 e.g. $ python server.py 1234
 		3) On a separate terminal, navigate to where client.py is
-		4) Type "python client.py <server_machine> <port_number>" to run the client
-		   To test on the same computer, use $ python client.py localhost 1234
-		  	 e.g. $ python client.py ecs.fullerton.edu 1234
+		4) Type "python3 client.py <server_machine> <port_number>" to run the client
+                 To test on the same computer:
+                    $ python3 client.py localhost 1234
+                 To test on an actual server
+		  	      $ python3 client.py ecs.fullerton.edu 1234
 		5) Start using the program
